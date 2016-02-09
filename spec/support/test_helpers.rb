@@ -3,7 +3,7 @@ module TestHelpers
     record = described_class.new
     attributes.each do |attribute|
       it "has #{attribute}" do
-        expect(record.send("#{attribute}")).to be_falsey
+        expect{record.send(attribute)}.to_not raise_error
       end
     end
   end
