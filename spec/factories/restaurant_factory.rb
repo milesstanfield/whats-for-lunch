@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :restaurant do
-    title "Chick-fi-a"
+    name "Chick-fi-a"
   end
 end

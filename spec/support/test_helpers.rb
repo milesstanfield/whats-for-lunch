@@ -14,4 +14,9 @@ module TestHelpers
     fill_in 'user_password', with: password
     click_button 'Log in'
   end
+
+  def fill_and_submit_new_restaurant_form(name = 'Chick-fil-a')
+    fill_in 'restaurant_name', with: name
+    click_button 'Create Restaurant'
+  end
 end

@@ -12,4 +12,15 @@ describe Restaurant do
       expect(restaurant.ratings).to eq []
     end
   end
+
+  describe 'validations' do
+    it 'requires a name' do
+      expect{FactoryGirl.create(:restaurant, name: nil)}.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
+    it 'must have a unique name' do
+      FactoryGirl.create(:restaurant)
+      expect{FactoryGirl.create(:restaurant)}.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
 end
