@@ -23,7 +23,7 @@ describe 'login page', type: :feature do
         before { FactoryGirl.create(:user) }
         before(:each){ login }
 
-        it 'redirects to home page' do
+        it 'redirects to dashboard page' do
           expect(current_path).to eq '/'
         end
       end

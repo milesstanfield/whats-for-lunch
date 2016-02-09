@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'home page', type: :feature do
+describe 'dashboard', type: :feature do
   describe 'visit /' do
     before(:each){ visit '/' }
 
@@ -39,7 +39,7 @@ describe 'home page', type: :feature do
         context 'on click' do
           before(:each){ click_link 'Log out' }
 
-          it 'stays on the home page' do
+          it 'stays on the dashboard page' do
             expect(current_path).to eq '/'
           end
 
