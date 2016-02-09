@@ -12,5 +12,8 @@
  *
  *= require 'bootstrap'
  *= require 'bootstrap_overrides'
+ *= require 'layouts'
+ *= require 'modules'
+ *= require 'base'
  *= require_self
  */
