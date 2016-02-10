@@ -26,7 +26,7 @@ describe 'new restaurant page', type: :feature do
       end
 
       it 'has a dropdown to select rating value' do
-        select '0', from: 'rating_value'
+        select '1', from: 'rating_value'
       end
 
       it 'has a submit button' do

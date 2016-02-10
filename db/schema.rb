@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160209171302) do
   create_table "ratings", force: :cascade do |t|
     t.integer "user_id"
     t.integer "restaurant_id"
-    t.integer "value",         default: 0
+    t.integer "value",         default: 1
   end
 
   create_table "restaurants", force: :cascade do |t|
