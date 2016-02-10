@@ -1,6 +1,8 @@
 class RestaurantsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.where(user_id: current_user.id)
   end
 
   def show

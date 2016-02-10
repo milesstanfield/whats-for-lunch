@@ -8,10 +8,10 @@ module TestHelpers
     end
   end
 
-  def login(email = 'user@example.com', password = 'password')
+  def login(user)
     visit '/users/sign_in'
-    fill_in 'user_email', with: email
-    fill_in 'user_password', with: password
+    fill_in 'user_email', with: user.try('email')
+    fill_in 'user_password', with: user.try('password')
     click_button 'Log in'
   end
 
@@ -22,5 +22,11 @@ module TestHelpers
 
   def now_time
     Time.parse('2016-02-09 23:41:47 -0500')
+  end
+
+  def create_restaurants(user = FactoryGirl.create(:user))
+    user.restaurants << FactoryGirl.create(:restaurant, name: 'oldest', created_at: now_time - 2.days)
+    user.restaurants << FactoryGirl.create(:restaurant, name: 'older', created_at: now_time - 1.days)
+    user.restaurants << FactoryGirl.create(:restaurant, name: 'newest', created_at: now_time)
   end
 end

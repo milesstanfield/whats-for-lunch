@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Restaurant do
-  subject(:restaurant){ Restaurant.new }
+  subject(:restaurant){ FactoryGirl.create(:restaurant) }
 
   describe 'attributes' do
-    it_has_attributes 'name'
+    it_has_attributes 'name', 'user_id'
   end
 
   describe 'associations' do
@@ -26,10 +26,18 @@ describe Restaurant do
 
   describe '.recent' do
     it 'sorts by recently created' do
-      oldest = FactoryGirl.create(:restaurant, name: 'oldest', created_at: now_time - 2.days)
-      older =  FactoryGirl.create(:restaurant, name: 'older', created_at: now_time - 1.days)
-      newest = FactoryGirl.create(:restaurant, name: 'newest', created_at: now_time)
-      expect(Restaurant.recent.map(&:id)).to eq [newest.id, older.id, oldest.id]
+      create_restaurants
+      expect(Restaurant.recent.map(&:name)).to eq ['newest', 'older', 'oldest']
+    end
+  end
+
+  describe '.user_rating(user)' do
+    it 'gets restaurant rating record from given user' do
+      user = FactoryGirl.create(:user)
+      user.restaurants << restaurant
+      rating = FactoryGirl.create(:rating, user_id: user.id, value: 123)
+      restaurant.ratings << rating
+      expect(restaurant.user_rating(user)).to eq rating
     end
   end
 end

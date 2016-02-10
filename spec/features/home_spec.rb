@@ -29,8 +29,7 @@ describe 'home', type: :feature do
       end
 
       context 'when logged in' do
-        before { FactoryGirl.create(:user) }
-        before(:each){ login }
+        before(:each){ login FactoryGirl.create(:user) }
 
         it 'is on the page' do
           expect(page).to have_link 'Log out'

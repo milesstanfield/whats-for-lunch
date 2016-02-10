@@ -20,8 +20,7 @@ describe 'login page', type: :feature do
       end
 
       context 'on succcessful login' do
-        before { FactoryGirl.create(:user) }
-        before(:each){ login }
+        before(:each){ login FactoryGirl.create(:user) }
 
         it 'redirects to home page' do
           expect(current_path).to eq '/'
@@ -29,7 +28,7 @@ describe 'login page', type: :feature do
       end
 
       context 'on unsuccessful login' do
-        before(:each){ login('non_existant_user@example.com', 'password') }
+        before(:each){ login(nil) }
 
         it 'stays on the login page' do
           expect(current_path).to eq '/users/sign_in'
