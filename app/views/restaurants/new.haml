@@ -1,15 +1,16 @@
-.row
-  .col-lg-6.col-lg-offset-3
-    %h3.page-header= 'New Restaurant'
+.container-fluid
+  .row
+    .col-lg-6.col-lg-offset-3
+      %h3.page-header= 'New Restaurant'
 
-    = form_for(@restaurant) do |f|
-      - if @restaurant.errors.any?
-        .form-group{name: 'flash-errors'}
-          .alert.alert-danger
-            - @restaurant.errors.full_messages.each do |message|
-              = message
-      .form-group
-        = f.text_field :name, class: 'form-control', placeholder: 'name of restaurant'
-        %span.input-group-btn
-      .form-group
-        = f.submit 'Create Restaurant', class: 'btn btn-primary'
+      = form_for(@restaurant) do |f|
+        - if @restaurant.errors.any?
+          .form-group{name: 'flash-errors'}
+            .alert.alert-danger
+              - @restaurant.errors.full_messages.each do |message|
+                = message
+        .form-group
+          = f.text_field :name, class: 'form-control', placeholder: 'name of restaurant'
+          %span.input-group-btn
+        .form-group
+          = f.submit 'Create Restaurant', class: 'btn btn-primary'

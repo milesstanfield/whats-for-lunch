@@ -7,7 +7,9 @@
     = csrf_meta_tags
     %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
   %body
-    - if flash[:message]
-      %div{name: 'flash-messages'}
-        .container.alert.alert-info= flash[:message]
-    = yield
+    = render 'shared/nav'
+    .l-margin-top-nav-height
+      - if flash[:message]
+        %div{name: 'flash-messages'}
+          .container.alert.alert-info= flash[:message]
+      = yield

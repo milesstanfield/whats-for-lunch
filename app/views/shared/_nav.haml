@@ -2,18 +2,17 @@
   .container-fluid
     .navbar-header
       = render 'shared/hamburger'
-      = link_to 'What\'s For Lunch at Springbot?', root_path, class: 'navbar-brand'
+      = link_to 'What\'s For Lunch?', root_path, class: 'navbar-brand'
 
     #navbar.navbar-collapse.collapse
       %ul.nav.navbar-nav.navbar-right
-        %li.active= link_to 'Dashboard', root_path
-
         %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Restaurants
+          = link_to restaurants_path, 'data-toggle' => 'dropdown' do
+            Admin
             %span.caret
           %ul.dropdown-menu
-            %li= link_to 'Add New', new_restaurant_path
+            %li= link_to 'edit your restaurants', restaurants_path
+            %li= link_to 'add new restaurant', new_restaurant_path
 
         - unless user_signed_in?
           %li= link_to 'Log in', new_user_session_path

@@ -33,19 +33,20 @@ describe RestaurantsController, type: :controller do
   end
 
   describe '#create' do
-    context 'successfully creates restaurant' do
-      it 'renders the index template' do
+    context 'on successfully creating restaurant' do
+      it 'redirects to index' do
         params = {restaurant: {name: 'Chick-fil-a'}}
         restaurant = Restaurant.new(params[:restaurant])
         expect(Restaurant).to receive(:new).with(params[:restaurant]).and_return(restaurant)
         expect(restaurant).to receive(:save).and_return(true)
         post :create, params
         expect(response).to redirect_to '/restaurants'
+        expect(session[:flash]['flashes']).to eq({'message'=>'Restaurant successfully created!'})
         expect(assigns(:restaurant)).to eq restaurant
       end
     end
 
-    context 'unsuccessfully creates restaurant' do
+    context 'on unsuccessfully creating restaurant' do
       it 'rerenders the new template' do
         params = {restaurant: {name: nil}}
         restaurant = Restaurant.new(params[:restaurant])
@@ -53,6 +54,33 @@ describe RestaurantsController, type: :controller do
         expect(restaurant).to receive(:save).and_return(false)
         post :create, params
         expect(response).to render_template :new
+        expect(assigns(:restaurant)).to eq restaurant
+      end
+    end
+  end
+
+  describe '#destroy' do
+    context 'on successfully destroying restaurant' do
+      it 'redirects to index' do
+        params = {id: '123'}
+        restaurant = Restaurant.new(params[:restaurant])
+        expect(Restaurant).to receive(:find).with(params[:id]).and_return(restaurant)
+        expect(restaurant).to receive(:destroy).and_return(true)
+        delete :destroy, params
+        expect(response).to redirect_to '/restaurants'
+        expect(session[:flash]['flashes']).to eq({'message'=>'Restaurant successfully deleted!'})
+        expect(assigns(:restaurant)).to eq restaurant
+      end
+    end
+
+    context 'on unsuccessful destroying restaurant' do
+      it 'renders the index template' do
+        params = {id: '123'}
+        restaurant = Restaurant.new({id: '456'})
+        expect(Restaurant).to receive(:find).with(params[:id]).and_return(restaurant)
+        expect(restaurant).to receive(:destroy).and_return(false)
+        delete :destroy, params
+        expect(response).to render_template :index
         expect(assigns(:restaurant)).to eq restaurant
       end
     end

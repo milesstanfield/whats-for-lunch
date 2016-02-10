@@ -19,4 +19,8 @@ module TestHelpers
     fill_in 'restaurant_name', with: name
     click_button 'Create Restaurant'
   end
+
+  def now_time
+    Time.parse('2016-02-09 23:41:47 -0500')
+  end
 end
