@@ -29,4 +29,18 @@ module TestHelpers
     user.restaurants << FactoryGirl.create(:restaurant, name: 'older', created_at: now_time - 1.days)
     user.restaurants << FactoryGirl.create(:restaurant, name: 'newest', created_at: now_time)
   end
+
+  def create_path_from_destination!(destination)
+    Restaurant.delete_all
+    restaurant = FactoryGirl.create(:restaurant)
+    case destination
+    when '/restaurants/:id'
+      @path = "/restaurants/#{restaurant.id}"
+    when '/restaurants/:id/edit'
+      @path = "/restaurants/#{restaurant.id}/edit"
+    else
+      @path = destination
+    end
+  end
+
 end

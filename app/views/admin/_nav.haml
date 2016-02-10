@@ -1,13 +1,10 @@
-.navbar.navbar-fixed-top.navbar-inverse.l-margin-top-nav-height.m-bg-primary
+.navbar.navbar-fixed-top.navbar-inverse.l-margin-top-nav-height.m-bg-primary{name: 'admin-nav'}
   .container
     .row
       .col-lg-12
         = link_to restaurants_path do
           %button{type: 'button', class: 'btn btn-default navbar-btn'}
             Restaurants
-        = link_to root_path do
-          %button{type: 'button', class: 'btn btn-default navbar-btn'}
-            Ratings
         = link_to new_restaurant_path, class: 'pull-right' do
           %button{type: 'button', class: 'btn btn-success navbar-btn'}
             New Restaurant

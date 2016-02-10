@@ -1,9 +1,10 @@
 module NavTestHelpers
-  def nav_expectations(path = nil, destination: nil)
-    describe 'home page' do
-      change_path(destination)
+  def nav_expectations(destination)
+    before(:each){ create_path_from_destination!(destination) }
+
+    describe @path do
       let(:user){ FactoryGirl.create(:user) }
-      before { visit path }
+      before { visit @path }
 
       context 'when logged out' do
         it 'has a nav' do
@@ -38,10 +39,9 @@ module NavTestHelpers
       end
 
       context 'when logged in' do
-        change_path(destination)
         before(:each) do
           login user
-          visit path
+          visit @path
         end
 
         it 'has a nav' do
@@ -88,17 +88,7 @@ module NavTestHelpers
         end
       end
 
-    end
-  end
 
-  def change_path(destination)
-    Restaurant.delete_all
-    restaurant = FactoryGirl.create(:restaurant)
-    case destination
-    when '/restaurants/:id'
-      path = "/restaurants/#{restaurant.id}"
-    when '/restaurants/:id/edit'
-      path = "/restaurants/#{restaurant.id}/edit"
     end
   end
 end
