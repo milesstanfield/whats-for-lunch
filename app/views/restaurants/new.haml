@@ -7,6 +7,7 @@
       = form_for(@restaurant) do |f|
         = render 'shared/flash_errors'
         .form-group
+          = f.hidden_field :user_id, value: current_user.id
           = f.text_field :name, class: 'form-control', placeholder: 'name of restaurant'
           %span.input-group-btn
         .form-group

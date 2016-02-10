@@ -43,7 +43,10 @@ describe 'new restaurant page', type: :feature do
         end
 
         it 'creates new restaurant record' do
-          expect(Restaurant.find_by_name('Chick-fil-a')).to be_present
+          visit '/restaurants'
+          within '[name=\'data-row\']' do
+            expect(page).to have_content 'Chick-fil-a'
+          end
         end
       end
 
