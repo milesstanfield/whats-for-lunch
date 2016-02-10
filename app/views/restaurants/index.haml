@@ -1,20 +1,19 @@
-.container-fluid
-  .row
-    .col-lrg-12.main
+= render 'admin/nav'
+.container
+  .row.l-margin-top-nav-height
+    .col-lg-12
       %h2.sub-header Your Restaurants
       %table.table.table-striped
         %thead
           %tr
             %th Name
             %th Your Rating
-            %th Community Average Rating
             %th Action
         %tbody
           - @restaurants.recent.each do |restaurant|
             %tr{name: 'data-row'}
               %td= restaurant.name
-              %td= restaurant.user_rating(current_user).try('value')
-              %td 4 of 5
+              %td= restaurant.user_rating(current_user)
               %td
                 = link_to 'view', restaurant_path(restaurant)
                 %span= '/'

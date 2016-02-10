@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Restaurant do
   subject(:restaurant){ FactoryGirl.create(:restaurant) }
+  let(:user){ FactoryGirl.create(:user) }
 
   describe 'attributes' do
     it_has_attributes 'name', 'user_id'
@@ -33,11 +34,16 @@ describe Restaurant do
 
   describe '.user_rating(user)' do
     it 'gets restaurant rating record from given user' do
-      user = FactoryGirl.create(:user)
       user.restaurants << restaurant
-      rating = FactoryGirl.create(:rating, user_id: user.id, value: 123)
+      rating = FactoryGirl.create(:rating, user_id: user.id, value: 3)
       restaurant.ratings << rating
-      expect(restaurant.user_rating(user)).to eq rating
+      expect(restaurant.user_rating(user)).to eq '3 of 5'
+    end
+
+    context 'when no rating exists' do
+      it 'defaults to 0 of 5' do
+        expect(restaurant.user_rating(user)).to eq '0 of 5'
+      end
     end
   end
 end

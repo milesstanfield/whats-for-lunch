@@ -39,35 +39,77 @@ describe 'index restaurant page', type: :feature do
           expect(page).not_to have_text 'unowned'
         end
 
-        def rows
-          page.all('[name=\'data-row\']')
-        end
+        describe 'data rows' do
+          let(:restaurant){ Restaurant.find_by_name('newest') }
 
-        xdescribe 'data rows' do
           it 'has restaurant name' do
-            within first_row do
+            within rows.first do
               expect(page).to have_text 'newest'
             end
           end
 
           it 'has users restaurant rating' do
-            within first_row do
-              expect(page).to have_text 'foo'
+            within rows.first do
+              expect(page).to have_text '0 of 5'
             end
           end
 
-          it 'has community restaurant rating' do
-            within first_row do
-              expect(page).to have_text 'foo'
+          describe 'action links' do
+            describe 'view link' do
+              it 'exists' do
+                within rows.first do
+                  expect(page).to have_link 'view'
+                end
+              end
+
+              context 'on click' do
+                it 'redirects to show page' do
+                  within rows.first do
+                    click_link 'view'
+                    expect(current_path).to eq "/restaurants/#{restaurant.id}"
+                  end
+                end
+              end
+            end
+
+            describe 'edit link' do
+              it 'exists' do
+                within rows.first do
+                  expect(page).to have_link 'edit'
+                end
+              end
+
+              context 'on click' do
+                it 'redirects to edit page' do
+                  within rows.first do
+                    click_link 'edit'
+                    expect(current_path).to eq "/restaurants/#{restaurant.id}/edit"
+                  end
+                end
+              end
+            end
+
+            describe 'delete link' do
+              it 'exists' do
+                within rows.first do
+                  expect(page).to have_link 'delete'
+                end
+              end
+
+              context 'on click' do
+                it 'redirects to index page' do
+                  within rows.first do
+                    click_link 'delete'
+                    expect(current_path).to eq '/restaurants'
+                  end
+                end
+              end
             end
           end
+        end
 
-          xdescribe 'action links' do
-          end
-
-          def first_row
-            page.first('[name=\'data-row\']')
-          end
+        def rows
+          page.all('[name=\'data-row\']')
         end
       end
     end

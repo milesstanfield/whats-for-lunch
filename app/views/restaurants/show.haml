@@ -1,1 +1,20 @@
-= @restaurant.name
+= render 'admin/nav'
+.container-fluid
+  .row.l-margin-top-nav-height
+    .col-lg-6.col-lg-offset-3
+      %h3.page-header= @restaurant.name
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Your Rating
+        %tbody
+          %tr{name: 'data-row'}
+            %td= @restaurant.user_rating(current_user)
+
+      = link_to edit_restaurant_path(@restaurant) do
+        %button{class: 'btn btn-warning'}
+          edit
+
+      = link_to restaurant_path(@restaurant), method: :delete do
+        %button{class: 'btn btn-danger'}
+          delete
