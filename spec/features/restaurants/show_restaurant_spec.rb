@@ -54,6 +54,11 @@ describe 'show restaurant page', type: :feature do
             click_link 'delete'
             expect(current_path).to eq '/restaurants'
           end
+
+          it 'removes record' do
+            click_link 'delete'
+            expect(Restaurant.find_by_name('newest')).not_to be_present
+          end
         end
       end
     end

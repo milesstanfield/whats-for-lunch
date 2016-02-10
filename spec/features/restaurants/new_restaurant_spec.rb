@@ -41,6 +41,10 @@ describe 'new restaurant page', type: :feature do
             expect(page).to have_text 'Restaurant successfully created!'
           end
         end
+
+        it 'creates new restaurant record' do
+          expect(Restaurant.find_by_name('Chick-fil-a')).to be_present
+        end
       end
 
       context 'on unsuccessful form submission' do

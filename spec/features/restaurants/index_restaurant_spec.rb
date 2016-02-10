@@ -103,6 +103,13 @@ describe 'index restaurant page', type: :feature do
                     expect(current_path).to eq '/restaurants'
                   end
                 end
+
+                it 'removes record' do
+                  within rows.first do
+                    click_link 'delete'
+                  end
+                  expect(Restaurant.find_by_name('newest')).not_to be_present
+                end
               end
             end
           end
