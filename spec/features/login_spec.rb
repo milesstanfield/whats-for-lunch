@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'login page', type: :feature do
-  describe 'visit /users/sign_in' do
+  describe '/users/sign_in' do
     before(:each){ visit '/users/sign_in' }
 
     describe 'form' do
@@ -23,7 +23,7 @@ describe 'login page', type: :feature do
         before { FactoryGirl.create(:user) }
         before(:each){ login }
 
-        it 'redirects to dashboard page' do
+        it 'redirects to home page' do
           expect(current_path).to eq '/'
         end
       end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DashboardController, type: :controller do
+describe HomeController, type: :controller do
   describe '#index' do
     it 'renders the index template' do
       get :index

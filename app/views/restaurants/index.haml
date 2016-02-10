@@ -7,7 +7,7 @@
           %tr
             %th Name
             %th Your Rating
-            %th Average Community Rating
+            %th Community Rating
             %th Action
         %tbody
           - @restaurants.recent.each do |restaurant|
@@ -16,4 +16,8 @@
               %td 3 of 5
               %td 4 of 5
               %td
+                = link_to 'view', restaurant_path(restaurant)
+                %span= '/'
+                = link_to 'edit', edit_restaurant_path(restaurant)
+                %span= '/'
                 = link_to 'delete', restaurant_path(restaurant), method: :delete

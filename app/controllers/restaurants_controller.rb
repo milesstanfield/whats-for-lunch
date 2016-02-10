@@ -7,8 +7,21 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
 
+  def edit
+    @restaurant = Restaurant.find(params[:id])
+  end
+
   def new
     @restaurant = Restaurant.new
+  end
+
+  def update
+    @restaurant = Restaurant.find(params[:id])
+    if @restaurant.update_attributes(restaurant_params)
+      redirect_to @restaurant, flash: { message: 'Restaurant successfully updated!' }
+    else
+      redirect_to new_restaurant_path, flash: { errors: @restaurant.errors.full_messages }
+    end
   end
 
   def create
@@ -16,7 +29,7 @@ class RestaurantsController < ApplicationController
     if @restaurant.save
       redirect_to @restaurant, flash: { message: 'Restaurant successfully created!' }
     else
-      render :new
+      redirect_to new_restaurant_path, flash: { errors: @restaurant.errors.full_messages }
     end
   end
 
@@ -25,7 +38,7 @@ class RestaurantsController < ApplicationController
     if @restaurant.destroy
       redirect_to restaurants_path, flash: { message: 'Restaurant successfully deleted!' }
     else
-      render :index
+      redirect_to :back
     end
   end
 

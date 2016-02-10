@@ -1,0 +1,6 @@
+- if flash['errors'].present?
+  .form-group{name: 'flash-errors'}
+    .alert.alert-danger
+      - flash['errors'].each do |error|
+        = error
+        %br

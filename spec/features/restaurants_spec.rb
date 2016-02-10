@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'restaurant admin pages', type: :feature do
-  describe 'visit /restaurants/new' do
+  describe '/restaurants/new' do
     before(:each){ visit '/restaurants/new' }
 
     it 'has a header' do
