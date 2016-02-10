@@ -9,9 +9,11 @@
         %thead
           %tr
             %th Your Rating
+            %th Your Last Visit
         %tbody
           %tr{name: 'data-row'}
             %td= @restaurant.user_rating(current_user).value_in_words
+            %td= @restaurant.user_visit(current_user).time
 
       = link_to edit_restaurant_path(@restaurant) do
         %button{class: 'btn btn-warning'}

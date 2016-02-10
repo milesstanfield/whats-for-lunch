@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
+gem 'bootstrap-datepicker-rails'
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -27,6 +28,7 @@ end
 group :test do
   gem 'capybara', '> 2.3.0'
   gem 'capybara-webkit', '~> 1.1.0'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
 end

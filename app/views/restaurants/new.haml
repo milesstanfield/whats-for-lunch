@@ -15,4 +15,8 @@
           = select(:rating, :value, Rating.available_values, selected: '1')
           = hidden_field :rating, :user_id, value: current_user.id
         .form-group
+          = label_tag :visit, 'Your last visit'
+          = text_field :visit, :time, 'data-provide' => 'datepicker', value: TimeFormatter.visit_time(Time.now)
+          = hidden_field :visit, :user_id, value: current_user.id
+        .form-group
           = f.submit 'Create Restaurant', class: 'btn btn-primary'

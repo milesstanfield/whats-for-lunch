@@ -19,13 +19,12 @@ describe 'home', type: :feature do
         end
       end
 
-      context 'when logged in' do
+      xcontext 'when logged in' do
       end
     end
 
-
     describe 'logout link' do
-      context 'when logged out' do
+      xcontext 'when logged out' do
       end
 
       context 'when logged in' do
@@ -52,7 +51,5 @@ describe 'home', type: :feature do
         end
       end
     end
-
-
   end
 end

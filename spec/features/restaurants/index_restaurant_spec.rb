@@ -13,7 +13,7 @@ describe 'index restaurant page', type: :feature do
   context 'when logged in' do
     before do
       user = FactoryGirl.create(:user)
-      create_restaurants_and_ratings(user)
+      create_restaurants_ratings_visits(user)
       FactoryGirl.create(:restaurant, name: 'unowned')
       login user
       visit '/restaurants'

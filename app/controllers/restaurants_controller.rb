@@ -28,7 +28,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    if @restaurant.save && save_rating!(@restaurant)
+    if @restaurant.save && save_rating!(@restaurant) && save_visit!(@restaurant)
       redirect_with_message @restaurant, 'created'
     else
       redirect_with_error new_restaurant_path, @restaurant
@@ -54,8 +54,21 @@ class RestaurantsController < ApplicationController
     params.require(:rating).permit(:value, :user_id)
   end
 
+  def visit_params
+    params.require(:visit).permit(:time, :user_id)
+  end
+
   def rating
     Rating.new(rating_params)
+  end
+
+  def visit
+    Visit.new params_with_time(visit_params)
+  end
+
+  def params_with_time(params)
+    params[:time] = TimeFormatter.visit_time(Time.now) if params[:time].empty?
+    params
   end
 
   def redirect_with_message(path, verb)
@@ -68,6 +81,10 @@ class RestaurantsController < ApplicationController
 
   def save_rating!(restaurant)
     restaurant.ratings << rating
+  end
+
+  def save_visit!(restaurant)
+    restaurant.visits << visit
   end
 
   def update_rating!(restaurant)

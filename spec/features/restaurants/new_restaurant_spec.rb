@@ -29,6 +29,10 @@ describe 'new restaurant page', type: :feature do
         select '1', from: 'rating_value'
       end
 
+      it 'has a visit time field' do
+        fill_in 'visit_time', with: '01/04/2016'
+      end
+
       it 'has a submit button' do
         expect(page).to have_button 'Create Restaurant'
       end
@@ -46,11 +50,19 @@ describe 'new restaurant page', type: :feature do
           end
         end
 
-        it 'creates new restaurant record' do
-          visit '/restaurants'
+        it 'has restaurant name' do
+          expect(page).to have_text 'Chick-fil-a'
+        end
+
+        it 'has restaurant rating' do
           within '[name=\'data-row\']' do
-            expect(page).to have_content 'Chick-fil-a'
-            expect(page).to have_content '5 of 5'
+            expect(page).to have_text '5 of 5'
+          end
+        end
+
+        it 'has last visit time' do
+          within '[name=\'data-row\']' do
+            expect(page).to have_text '01/04/2016'
           end
         end
       end
