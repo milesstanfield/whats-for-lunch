@@ -1,6 +1,8 @@
 = render 'admin/nav'
 .container-fluid
   .row.l-margin-top-nav-height
+    .col-lg-12
+      = render 'shared/flash_messages'
     .col-lg-6.col-lg-offset-3
       %h3.page-header= @restaurant.name
       %table.table.table-striped

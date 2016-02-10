@@ -9,7 +9,4 @@
   %body
     = render 'shared/nav'
     .l-margin-top-nav-height
-      - if flash[:message]
-        %div{name: 'flash-messages'}
-          .container.alert.alert-info= flash[:message]
       = yield
