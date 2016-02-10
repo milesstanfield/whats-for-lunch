@@ -29,20 +29,20 @@ module TestHelpers
     oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', created_at: now_time - 2.days)
     older_restaurant = FactoryGirl.create(:restaurant, name: 'older', created_at: now_time - 1.days)
     newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', created_at: now_time)
-
     user.restaurants << oldest_restaurant
     oldest_restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
-
     user.restaurants << older_restaurant
     older_restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
-
     user.restaurants << newest_restaurant
     newest_restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
   end
 
-  def create_path_from_destination!(destination)
+  def create_path_from_destination!(destination, user)
     Restaurant.delete_all
     restaurant = FactoryGirl.create(:restaurant)
+    user.restaurants << restaurant
+    restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
+
     case destination
     when '/restaurants/:id'
       @path = "/restaurants/#{restaurant.id}"

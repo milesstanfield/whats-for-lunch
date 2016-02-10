@@ -1,9 +1,9 @@
 module NavTestHelpers
   def nav_expectations(destination)
-    before(:each){ create_path_from_destination!(destination) }
+    let(:user){ FactoryGirl.create(:user) }
+    before(:each){ create_path_from_destination!(destination, user) }
 
     describe @path do
-      let(:user){ FactoryGirl.create(:user) }
       before { visit @path }
 
       context 'when logged out' do
@@ -87,8 +87,6 @@ module NavTestHelpers
           end
         end
       end
-
-
     end
   end
 end

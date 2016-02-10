@@ -10,4 +10,8 @@
           = f.text_field :name, class: 'form-control', placeholder: @restaurant.name
           %span.input-group-btn
         .form-group
+          = label_tag :rating, 'Rating'
+          = select(:rating, :value, Rating.available_values, selected: @restaurant.user_rating(current_user).value)
+          = hidden_field :rating, :user_id, value: current_user.id
+        .form-group
           = f.submit 'Update Restaurant', class: 'btn btn-primary'

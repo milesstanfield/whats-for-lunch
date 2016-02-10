@@ -1,9 +1,9 @@
 module AdminNavTestHelpers
   def admin_nav_expectations(destination)
-    before(:each){ create_path_from_destination!(destination) }
+    let(:user){ FactoryGirl.create(:user) }
+    before(:each){ create_path_from_destination!(destination, user) }
 
     describe @path do
-      let(:user){ FactoryGirl.create(:user) }
       before { login user }
       before(:each){ visit @path }
 

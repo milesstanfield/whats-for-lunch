@@ -19,7 +19,7 @@ class RestaurantsController < ApplicationController
 
   def update
     @restaurant = Restaurant.find(params[:id])
-    if @restaurant.update_attributes restaurant_params
+    if @restaurant.update_attributes(restaurant_params) && update_rating!(@restaurant)
       redirect_with_message @restaurant, 'updated'
     else
       redirect_with_error new_restaurant_path, @restaurant
@@ -68,5 +68,9 @@ class RestaurantsController < ApplicationController
 
   def save_rating!(restaurant)
     restaurant.ratings << rating
+  end
+
+  def update_rating!(restaurant)
+    restaurant.user_rating(current_user).update_attributes(rating_params)
   end
 end

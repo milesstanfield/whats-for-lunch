@@ -37,16 +37,26 @@ describe 'edit restaurant page', type: :feature do
         end
 
         context 'on click' do
-          it 'redirects to show page' do
+          before do
+            fill_in 'restaurant_name', with: 'foo name'
+            select '5', from: 'rating_value'
             click_button 'Update Restaurant'
-            expect(current_path).to eq "/restaurants/#{restaurant.id}"
           end
 
-          it 'updates record' do
-            expect(Restaurant.find_by_name('foo name')).not_to be_present
-            fill_in 'restaurant_name', with: 'foo name'
-            click_button 'Update Restaurant'
-            expect(Restaurant.find_by_name('foo name')).to be_present
+          context 'after updating record' do
+            it 'redirects to show page' do
+              expect(current_path).to eq "/restaurants/#{restaurant.id}"
+            end
+
+            it 'shows updated name' do
+              expect(page).to have_text 'foo name'
+            end
+
+            it 'shows updated rating' do
+              within '[name=\'data-row\']' do
+                expect(page).to have_text '5 of 5'
+              end
+            end
           end
         end
       end
