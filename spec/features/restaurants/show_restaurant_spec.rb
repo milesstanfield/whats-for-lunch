@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'show restaurant page', type: :feature do
   let(:user){ FactoryGirl.create(:user) }
-  before { create_restaurants(user) }
+  before { create_restaurants_and_ratings(user) }
   let(:restaurant){ Restaurant.find_by_name('newest') }
 
   context 'when not logged in' do
@@ -27,7 +27,7 @@ describe 'show restaurant page', type: :feature do
 
       it 'has a rating' do
         within '[name=\'data-row\']' do
-          expect(page).to have_text '0 of 5'
+          expect(page).to have_text '1 of 5'
         end
       end
 

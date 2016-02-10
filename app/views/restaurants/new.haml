@@ -11,4 +11,8 @@
           = f.text_field :name, class: 'form-control', placeholder: 'name of restaurant'
           %span.input-group-btn
         .form-group
+          = label_tag :rating, 'Rating'
+          = select(:rating, :value, Rating.available_values, selected: '0')
+          = hidden_field :rating, :user_id, value: current_user.id
+        .form-group
           = f.submit 'Create Restaurant', class: 'btn btn-primary'

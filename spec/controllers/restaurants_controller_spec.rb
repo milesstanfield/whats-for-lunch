@@ -120,7 +120,7 @@ describe RestaurantsController, type: :controller do
     describe '#create' do
       context 'on successfully creating restaurant' do
         it 'redirects to index' do
-          params = {restaurant: {name: 'Chick-fil-a'}}
+          params = {restaurant: {name: 'Chick-fil-a'}, rating: {value: '1'}}
           restaurant = Restaurant.new(params[:restaurant])
           expect(Restaurant).to receive(:new).with(params[:restaurant]).and_return(restaurant)
           expect(restaurant).to receive(:save).and_return(true)

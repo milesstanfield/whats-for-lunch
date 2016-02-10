@@ -27,7 +27,7 @@ describe Restaurant do
 
   describe '.recent' do
     it 'sorts by recently created' do
-      create_restaurants
+      create_restaurants_and_ratings
       expect(Restaurant.recent.map(&:name)).to eq ['newest', 'older', 'oldest']
     end
   end
@@ -37,13 +37,7 @@ describe Restaurant do
       user.restaurants << restaurant
       rating = FactoryGirl.create(:rating, user_id: user.id, value: 3)
       restaurant.ratings << rating
-      expect(restaurant.user_rating(user)).to eq '3 of 5'
-    end
-
-    context 'when no rating exists' do
-      it 'defaults to 0 of 5' do
-        expect(restaurant.user_rating(user)).to eq '0 of 5'
-      end
+      expect(restaurant.user_rating(user)).to eq rating
     end
   end
 end

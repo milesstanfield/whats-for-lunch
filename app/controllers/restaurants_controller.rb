@@ -19,26 +19,26 @@ class RestaurantsController < ApplicationController
 
   def update
     @restaurant = Restaurant.find(params[:id])
-    if @restaurant.update_attributes(restaurant_params)
-      redirect_to @restaurant, flash: { message: 'Restaurant successfully updated!' }
+    if @restaurant.update_attributes restaurant_params
+      redirect_with_message @restaurant, 'updated'
     else
-      redirect_to new_restaurant_path, flash: { errors: @restaurant.errors.full_messages }
+      redirect_with_error new_restaurant_path, @restaurant
     end
   end
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    if @restaurant.save
-      redirect_to @restaurant, flash: { message: 'Restaurant successfully created!' }
+    if @restaurant.save && save_rating!(@restaurant)
+      redirect_with_message @restaurant, 'created'
     else
-      redirect_to new_restaurant_path, flash: { errors: @restaurant.errors.full_messages }
+      redirect_with_error new_restaurant_path, @restaurant
     end
   end
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
     if @restaurant.destroy
-      redirect_to restaurants_path, flash: { message: 'Restaurant successfully deleted!' }
+      redirect_with_message restaurants_path, 'deleted'
     else
       redirect_to :back
     end
@@ -48,5 +48,25 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(:name, :user_id)
+  end
+
+  def rating_params
+    params.require(:rating).permit(:value, :user_id)
+  end
+
+  def rating
+    Rating.new(rating_params)
+  end
+
+  def redirect_with_message(path, verb)
+    redirect_to path, flash: { message: "Restaurant successfully #{verb}!" }
+  end
+
+  def redirect_with_error(path, record)
+    redirect_to path, flash: { errors: record.errors.full_messages }
+  end
+
+  def save_rating!(restaurant)
+    restaurant.ratings << rating
   end
 end

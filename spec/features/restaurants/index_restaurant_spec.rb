@@ -13,7 +13,7 @@ describe 'index restaurant page', type: :feature do
   context 'when logged in' do
     before do
       user = FactoryGirl.create(:user)
-      create_restaurants(user)
+      create_restaurants_and_ratings(user)
       FactoryGirl.create(:restaurant, name: 'unowned')
       login user
       visit '/restaurants'
@@ -50,7 +50,7 @@ describe 'index restaurant page', type: :feature do
 
           it 'has users restaurant rating' do
             within rows.first do
-              expect(page).to have_text '0 of 5'
+              expect(page).to have_text '1 of 5'
             end
           end
 

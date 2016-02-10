@@ -5,8 +5,6 @@ class Restaurant < ActiveRecord::Base
   scope :recent, -> { order('created_at').reverse_order }
 
   def user_rating(user)
-    rating = self.ratings.find_by_user_id_and_restaurant_id(user.id, self.id)
-    rating = rating ? rating.value : 0
-    "#{rating} of 5"
+    self.ratings.find_by_user_id_and_restaurant_id(user.id, self.id)
   end
 end

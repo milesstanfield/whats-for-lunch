@@ -25,6 +25,10 @@ describe 'new restaurant page', type: :feature do
         fill_in 'restaurant_name', with: 'Chick-fil-a'
       end
 
+      it 'has a dropdown to select rating value' do
+        select '0', from: 'rating_value'
+      end
+
       it 'has a submit button' do
         expect(page).to have_button 'Create Restaurant'
       end
@@ -46,6 +50,7 @@ describe 'new restaurant page', type: :feature do
           visit '/restaurants'
           within '[name=\'data-row\']' do
             expect(page).to have_content 'Chick-fil-a'
+            expect(page).to have_content '5 of 5'
           end
         end
       end

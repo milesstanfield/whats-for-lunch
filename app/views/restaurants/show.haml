@@ -11,7 +11,7 @@
             %th Your Rating
         %tbody
           %tr{name: 'data-row'}
-            %td= @restaurant.user_rating(current_user)
+            %td= @restaurant.user_rating(current_user).value_in_words
 
       = link_to edit_restaurant_path(@restaurant) do
         %button{class: 'btn btn-warning'}

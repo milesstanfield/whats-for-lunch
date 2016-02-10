@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'edit restaurant page', type: :feature do
   let(:user){ FactoryGirl.create(:user) }
-  before { create_restaurants(user) }
+  before { create_restaurants_and_ratings(user) }
   let(:restaurant){ Restaurant.find_by_name('newest') }
 
   context 'when not logged in' do
