@@ -54,6 +54,7 @@ module TestHelpers
     oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', last_visited: TimeFormatter.visit_time(now_time - 2.days))
     older_restaurant = FactoryGirl.create(:restaurant, name: 'older', last_visited: TimeFormatter.visit_time(now_time - 1.days))
     newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', last_visited: TimeFormatter.visit_time(now_time))
+    ancient_restaurant = FactoryGirl.create(:restaurant, name: 'ancient', last_visited: TimeFormatter.visit_time(now_time - 30.days))
 
     user1 = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user, email: 'foo@example.com')
@@ -64,6 +65,11 @@ module TestHelpers
     oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 3, user_id: user2.id)
     oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user3.id)
     oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user4.id)
+
+    ancient_restaurant.ratings << FactoryGirl.create(:rating, value: 5, user_id: user1.id)
+    ancient_restaurant.ratings << FactoryGirl.create(:rating, value: 3, user_id: user2.id)
+    ancient_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user3.id)
+    ancient_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user4.id)
 
     older_restaurant.ratings << FactoryGirl.create(:rating, value: 4, user_id: user1.id)
     older_restaurant.ratings << FactoryGirl.create(:rating, value: 2, user_id: user2.id)

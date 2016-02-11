@@ -1,5 +1,5 @@
-- restaurants.each do |restaurant|
-  .relative.card.l-card.border-box.inline-block.v-align-top
+- restaurants.each_with_index do |restaurant, index|
+  .relative.card.l-card.border-box.inline-block.v-align-top{name: 'card'}
     .l-square-parent
       .l-sized-child
         .l-card-padding.height-100.width-100
@@ -19,7 +19,7 @@
                 .absolute.bottom.right
                   .fa.fa-calendar.card-icon.clickable
 
-                - if index == 0
+                - if index == 0 && recommendation_index == 0
                   .absolute.right.top.card-bookmark.m-color-warning
                     .inline-block.small-card-prompt #1 pick
                     .inline-block.fa.fa-bookmark.card-icon

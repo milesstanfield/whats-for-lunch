@@ -2,54 +2,41 @@ require 'spec_helper'
 
 describe 'home', type: :feature do
   describe 'visit /' do
+    before { create_multi_user_restaurants }
     before(:each){ visit '/' }
 
-    describe 'log in link' do
-      context 'when logged out' do
-        it 'is on the page' do
-          expect(page).to have_link 'Log in'
-        end
-
-        context 'on click' do
-          before(:each){ click_link 'Log in' }
-
-          it 'redirects to login path' do
-            expect(current_path).to eq '/users/sign_in'
-          end
+    describe 'cards' do
+      it 'has restaurant name' do
+        within first_card do
+          expect(page).to have_text 'older'
         end
       end
 
-      xcontext 'when logged in' do
-      end
-    end
-
-    describe 'logout link' do
-      xcontext 'when logged out' do
-      end
-
-      context 'when logged in' do
-        before(:each){ login FactoryGirl.create(:user) }
-
-        it 'is on the page' do
-          expect(page).to have_link 'Log out'
+      it 'has days since last visit' do
+        within first_card do
+          expect(page).to have_text '3'
         end
+      end
 
-        context 'on click' do
-          before(:each){ click_link 'Log out' }
+      it 'has (x) amount of community rated stars' do
+        within first_card do
+          selected_stars = page.all('.star-selected')
+          expect(selected_stars.count).to eq 3
+        end
+      end
 
-          it 'stays on the home page' do
-            expect(current_path).to eq '/'
-          end
-
-          it 'displays log in link' do
-            expect(page).to have_link 'Log in'
-          end
-
-          it 'hides log out link' do
-            expect(page).not_to have_link 'Log out'
+      context 'first card' do
+        it 'has #1 pick mark' do
+          within first_card do
+            expect(page).to have_css '.card-bookmark'
+            expect(page).to have_text '#1 pick'
           end
         end
       end
     end
+  end
+
+  def first_card
+    page.first('[name=\'card\']')
   end
 end

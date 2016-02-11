@@ -2,25 +2,16 @@
   .container.l-medium-vertical-padding
     .row
       .col-lg-12
-        .btn-group{'aria-label' => '...', :role => 'group'}
+        .btn-group{'aria-label' => '..', :role => 'group'}
           %button.btn.btn-primary
             Recommended
-          .btn-group
-            %button.btn.btn-default.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :type => 'button'}
-              Sort
-              %span.caret
-            %ul.dropdown-menu
-              %li
-                %a{:href => '#'} Dropdown link
-              %li
-                %a{:href => '#'} Dropdown link
 
           .btn-group
             %button.btn.btn-default.dropdown-toggle{'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', :type => 'button'}
               Filter
               %span.caret
             %ul.dropdown-menu
-              %li
-                %a{:href => '#'} Dropdown link
-              %li
-                %a{:href => '#'} Dropdown link
+              - 5.times do |index|
+                %li
+                  %a{href: '#'}
+                    = "#{index + 1} stars only"
