@@ -15,5 +15,3 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
-//= require masonry.pkgd.min
-//= require masonry-grids

@@ -4,8 +4,9 @@
     .row
       .col-lg-12
         %h3= 'Restaurants'
-      .col-lg-12.grid
-        - @restaurants.each do |restaurant|
-          .grid-item.m-bg-white.l-card.border-box
-            %h3= restaurant.name
-            %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+      .col-lg-12
+        - @recommendations.each do |value, restaurants|
+          - restaurants.each do |restaurant|
+            .m-bg-white.l-card.border-box
+              %h3= restaurant.name
+              %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.

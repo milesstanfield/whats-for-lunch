@@ -33,11 +33,32 @@ describe Restaurant do
     end
   end
 
-  describe '.order_by_name' do
-    before { create_restaurants_ratings(user) }
+  describe 'scopes' do
+    before(:each) { create_multi_user_restaurants }
 
-    it 'orders restaurants by their name' do
-      expect(Restaurant.order_by_name.map(&:name)).to eq ['newest', 'older', 'oldest']
+    describe '.order_by_name' do
+      it 'orders restaurants by their name' do
+        expect(Restaurant.order_by_name.map(&:name)).to eq ['newest', 'older', 'oldest']
+      end
+    end
+
+    describe '.recommended' do
+      it 'orders restaurants by their cumulative ratings' do
+        # 10=>[#<Restaurant id: 1, name: "oldest", last_visited: "02/07/2016">],
+        # 6=>[#<Restaurant id: 2, name: "older", last_visited: "02/08/2016">]
+        Restaurant.recommended.each_with_index do |recommendation, index|
+          expect(recommendation[0]).to eq 10 if index == 0
+          expect(recommendation[0]).to eq 6 if index == 1
+        end
+      end
+
+      it 'filters restaurants by their last_visited data (3 days new are removed)' do
+        newest = Restaurant.find_by_name('newest')
+        newest_is_in_collection = Restaurant.recommended.any? do |recommendation|
+          recommendation[1].any? {|restaurant| restaurant == newest }
+        end
+        expect(newest_is_in_collection).to be false
+      end
     end
   end
 end

@@ -6,4 +6,9 @@ class Restaurant < ActiveRecord::Base
   def user_rating(user)
     self.ratings.find_by_user_id_and_restaurant_id(user.id, self.id)
   end
+
+  def self.recommended
+    fresh = where('last_visited <= ?', 3.days.ago.strftime('%m/%d/%Y'))
+    fresh.group_by {|restaurant| restaurant.ratings.sum(:value) }
+  end
 end

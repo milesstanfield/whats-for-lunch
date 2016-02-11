@@ -50,4 +50,26 @@ module TestHelpers
     end
   end
 
+  def create_multi_user_restaurants
+    oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', last_visited: TimeFormatter.visit_time(now_time - 2.days))
+    older_restaurant = FactoryGirl.create(:restaurant, name: 'older', last_visited: TimeFormatter.visit_time(now_time - 1.days))
+    newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', last_visited: TimeFormatter.visit_time(now_time))
+
+    user1 = FactoryGirl.create(:user)
+    user2 = FactoryGirl.create(:user, email: 'foo@example.com')
+    user3 = FactoryGirl.create(:user, email: 'foobar@example.com')
+    user4 = FactoryGirl.create(:user, email: 'blah@example.com')
+
+    oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 5, user_id: user1.id)
+    oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 3, user_id: user2.id)
+    oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user3.id)
+    oldest_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user4.id)
+
+    older_restaurant.ratings << FactoryGirl.create(:rating, value: 4, user_id: user1.id)
+    older_restaurant.ratings << FactoryGirl.create(:rating, value: 2, user_id: user2.id)
+
+    newest_restaurant.ratings << FactoryGirl.create(:rating, value: 2, user_id: user1.id)
+    newest_restaurant.ratings << FactoryGirl.create(:rating, value: 2, user_id: user2.id)
+    newest_restaurant.ratings << FactoryGirl.create(:rating, value: 1, user_id: user3.id)
+  end
 end
