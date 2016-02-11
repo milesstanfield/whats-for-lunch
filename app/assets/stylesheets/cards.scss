@@ -12,13 +12,13 @@
   color: #777777;
 }
 .star:before {
-  content: "\f006";
+  content: '\f006';
 }
 .star-selected:before {
-  content: "\f005";
+  content: '\f005';
 }
 .rating span[class*='star']:hover:before, .rating span[class*='star']:hover ~ span[class*='star']:before {
-  content: "\f005";
+  content: '\f005';
   color: #e3cf7a;
 }
 .card-name {

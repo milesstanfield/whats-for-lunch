@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209171302) do
+ActiveRecord::Schema.define(version: 20160211181322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,17 @@ ActiveRecord::Schema.define(version: 20160209171302) do
     t.integer "value",         default: 1
   end
 
+  add_index "ratings", ["restaurant_id"], name: "index_ratings_on_restaurant_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+  add_index "ratings", ["value"], name: "index_ratings_on_value", using: :btree
+
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "last_visited"
   end
+
+  add_index "restaurants", ["last_visited"], name: "index_restaurants_on_last_visited", using: :btree
+  add_index "restaurants", ["name"], name: "index_restaurants_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

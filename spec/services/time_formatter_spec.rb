@@ -13,4 +13,10 @@ describe TimeFormatter do
       expect(TimeFormatter.days_ago('02/05/2016', control_time)).to eq 6
     end
   end
+
+  describe '.parsed_visit_time(visited_time)' do
+    it 'returns time object from strftime string' do
+      expect(TimeFormatter.parsed_visit_time('02/05/2016').to_s).to eq '2016-02-05 00:00:00 -0500'
+    end
+  end
 end
