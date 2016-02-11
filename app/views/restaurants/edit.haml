@@ -11,7 +11,8 @@
           %span.input-group-btn
         .form-group
           = label_tag :rating, 'Your Rating'
-          = select(:rating, :value, Rating.available_values, selected: @restaurant.user_rating(current_user).value)
+          - rating = @restaurant.user_rating(current_user)
+          = select(:rating, :value, Rating.available_values, selected: (rating.nil? ? 1 : rating.value))
           = hidden_field :rating, :user_id, value: current_user.id
         .form-group
           = label_tag :visit, 'Last visit'

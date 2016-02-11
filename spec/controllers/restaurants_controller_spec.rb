@@ -97,7 +97,7 @@ describe RestaurantsController, type: :controller do
           restaurant = Restaurant.new({id: '123'})
           expect(Restaurant).to receive(:find).with('123').and_return(restaurant)
           expect(restaurant).to receive(:update_attributes).with({'name'=>'Chick-fil-a', 'last_visited'=>'01/04/2006'}).and_return(true)
-          expect(controller).to receive(:update_rating!).with(restaurant).and_return(true)
+          expect(controller).to receive(:save_rating!).with(restaurant).and_return(true)
           put :update, params
           expect(response).to redirect_to '/restaurants'
           expect(session[:flash]['flashes']).to eq({'message'=>'Restaurant successfully updated!'})
