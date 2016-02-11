@@ -4,7 +4,8 @@ include Average
 class Recommendations
   class << self
     def fetch(restaurants)
-      rated_restaurants = rate_restaurants fresh_restaurants(restaurants)
+      fresh_restaurants = restaurants.by_day(3)
+      rated_restaurants = rate_restaurants(fresh_restaurants)
       reverse_hash sort_subsets_by_time(rated_restaurants)
     end
 
@@ -16,10 +17,6 @@ class Recommendations
 
     def rate_restaurants(restaurants)
       restaurants.group_by {|restaurant| average(restaurant) }
-    end
-
-    def fresh_restaurants(restaurants)
-      restaurants.where('last_visited <= ?', 3.days.ago.strftime('%m/%d/%Y'))
     end
 
     def reverse_hash(hash)

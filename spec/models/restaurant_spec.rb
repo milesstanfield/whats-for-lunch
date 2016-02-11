@@ -41,5 +41,11 @@ describe Restaurant do
         expect(Restaurant.order_by_name.map(&:name)).to eq ['ancient', 'newest', 'older', 'oldest']
       end
     end
+
+    describe '.by_day(day)' do
+      it 'returns all orders that fall within a given day range' do
+        expect(Restaurant.by_day(3).find_by_name('newest')).to be nil
+      end
+    end
   end
 end
