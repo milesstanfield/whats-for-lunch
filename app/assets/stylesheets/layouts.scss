@@ -1,6 +1,9 @@
 @import 'variables';
 @import 'mixins';
 
+.l-z-index-5 {
+  z-index: 5;
+}
 .l-margin-top-nav-height {
   margin-top: $nav-height;
 }
@@ -12,8 +15,8 @@
   padding-right: 10px;
 }
 .l-inner-card-padding {
-  padding-top: 10px;
   padding-left: 10px;
+  padding-right: 10px;
 }
 .l-card {
   width: 100%;
@@ -28,7 +31,7 @@
 }
 .l-square-parent {
   width: 100%;
-  padding-bottom: 40%;
+  padding-bottom: 60%;
   @include respond-to($med) {
     padding-bottom: 100%;
   }

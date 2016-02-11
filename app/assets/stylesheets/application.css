@@ -17,5 +17,6 @@
  *= require base
  *= require bootstrap-datepicker
  *= require dictate_css/base
+ *= require cards
  *= require_self
  */
