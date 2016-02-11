@@ -1,0 +1,9 @@
+@import 'variables';
+
+@mixin respond-to($min-width, $max-width : false) {
+  @if $max-width {
+    @media only screen and (min-width: $min-width) and (max-width: $max-width - $shim) { @content; }
+  } @else {
+    @media only screen and (min-width: $min-width) { @content; }
+  }
+}

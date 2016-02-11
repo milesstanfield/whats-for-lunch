@@ -1,18 +1,43 @@
 @import 'variables';
+@import 'mixins';
 
 .l-margin-top-nav-height {
   margin-top: $nav-height;
-}
-.l-height-minus-navs {
-  height: calc(100% - #{$nav-height});
 }
 .l-medium-vertical-padding {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.l-card-padding {
+  padding-right: 10px;
+}
+.l-inner-card-padding {
+  padding-top: 10px;
+  padding-left: 10px;
+}
 .l-card {
-  width: 250px;
-  height: 250px;
-  padding: 10px;
-  margin-bottom: 20px;
+  width: 100%;
+  @include respond-to($med, $lrg) {
+    width: 50%;
+  }
+  @include respond-to($lrg) {
+    width: 25%;
+  }
+  margin-bottom: 10px;
+  margin-right: -4.5px;
+}
+.l-square-parent {
+  width: 100%;
+  padding-bottom: 40%;
+  @include respond-to($med) {
+    padding-bottom: 100%;
+  }
+}
+.l-sized-child {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

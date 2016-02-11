@@ -8,7 +8,8 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.recommended
-    fresh = where('last_visited <= ?', 3.days.ago.strftime('%m/%d/%Y'))
-    fresh.group_by {|restaurant| restaurant.ratings.sum(:value) }
+    fresh_restaurants = where('last_visited <= ?', 3.days.ago.strftime('%m/%d/%Y'))
+    rated_restaurants = fresh_restaurants.group_by {|restaurant| restaurant.ratings.sum(:value) }
+    rated_restaurants.sort_by {|k, v| k }.reverse.to_h
   end
 end

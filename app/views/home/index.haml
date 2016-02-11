@@ -7,6 +7,10 @@
       .col-lg-12
         - @recommendations.each do |value, restaurants|
           - restaurants.each do |restaurant|
-            .m-bg-white.l-card.border-box
-              %h3= restaurant.name
-              %p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+            .relative.l-card.border-box.inline-block.v-align-top
+              .l-square-parent
+                .l-sized-child
+                  .l-card-padding.height-100.width-100
+                    .m-bg-white.height-100.width-100.l-inner-card-padding
+                      %h3= restaurant.name
+                      %p= value
