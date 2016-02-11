@@ -44,8 +44,6 @@ describe Restaurant do
 
     describe '.recommended' do
       it 'orders restaurants by their cumulative ratings' do
-        # 10=>[#<Restaurant id: 1, name: "oldest", last_visited: "02/07/2016">],
-        # 6=>[#<Restaurant id: 2, name: "older", last_visited: "02/08/2016">]
         Restaurant.recommended.each_with_index do |recommendation, index|
           expect(recommendation[0]).to eq 10 if index == 0
           expect(recommendation[0]).to eq 6 if index == 1

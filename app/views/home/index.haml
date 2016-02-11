@@ -5,26 +5,5 @@
       .col-lg-12
         %h3= 'Restaurants'
       .col-lg-12
-        - @recommendations.each do |value, restaurants|
-          - restaurants.each do |restaurant|
-            .relative.l-card.border-box.inline-block.v-align-top
-              .l-square-parent
-                .l-sized-child
-                  .l-card-padding.height-100.width-100
-                    .m-bg-white.height-100.width-100.m-border.relative
-                      .absolute-vertical-center.text-center.width-100.border-box.l-inner-card-padding.l-z-index-5.l-medium-vertical-padding
-                        %h2= restaurant.name
-                        .rating
-                          - 5.times do
-                            %span.star.clickable
-
-                      .border-box.l-inner-card-padding.height-100.l-medium-vertical-padding
-                        .relative.height-100
-                          .days-ago.absolute.bottom
-                            .inline-block.days.m-color-primary= TimeFormatter.days_ago(restaurant.last_visited)
-                            .inline-block.prompt-container.relative
-                              .small-prompt last visit
-                              .medium-prompt.m-color-primary days ago
-
-                          .absolute.bottom.right
-                            .fa.fa-calendar.calendar-icon.clickable
+        - @recommendations.each_with_index do |(value, restaurants), index|
+          = render 'shared/card', restaurants: restaurants, average_rating: Average.find(value, restaurants.count), index: index

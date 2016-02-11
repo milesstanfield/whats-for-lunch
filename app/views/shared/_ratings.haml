@@ -1,0 +1,6 @@
+.rating
+  - StarRatings.options(average_rating).each do |option|
+    - if option
+      %span.star-selected.clickable
+    - else
+      %span.star.clickable

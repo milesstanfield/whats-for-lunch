@@ -1,3 +1,5 @@
+@import 'variables';
+
 .rating {
   font-family: FontAwesome;
   font-weight: normal;
@@ -6,15 +8,24 @@
   unicode-bidi: bidi-override;
   direction: rtl;
 }
-.star:before {
-  content: "\f006";
+.star:before, .star-selected:before {
   color: #777777;
 }
-.rating span.star:hover:before, .rating span.star:hover ~ span.star:before {
+.star:before {
+  content: "\f006";
+}
+.star-selected:before {
+  content: "\f005";
+}
+.rating span[class*='star']:hover:before, .rating span[class*='star']:hover ~ span[class*='star']:before {
   content: "\f005";
   color: #e3cf7a;
 }
-.days-ago {
+.card-name {
+  font-size: 30px;
+  margin: 0;
+}
+.card-days-ago {
   .days {
     font-size: 33px;
     letter-spacing: 0.5px;
@@ -23,14 +34,20 @@
   .prompt-container {
     top: 0px;
   }
-  .small-prompt {
-    font-size: 12px;
-  }
   .medium-prompt {
     font-size: 14px;
     line-height: 10px;
   }
 }
-.calendar-icon {
+.small-card-prompt {
+  font-size: 12px;
+}
+.card-bookmark {
+  top: -12px;
+}
+.card-icon {
   font-size: 24px;
+}
+.calendar-icon:hover {
+  color: $info;
 }

@@ -20,7 +20,7 @@ describe 'index restaurant page', type: :feature do
 
     describe '/restaurants' do
       it 'has a header' do
-        expect(page).to have_text 'Springbot Restaurants'
+        expect(page).to have_text 'Restaurants'
       end
 
       describe 'data table' do

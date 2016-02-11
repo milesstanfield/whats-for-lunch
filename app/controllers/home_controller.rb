@@ -1,3 +1,6 @@
+require 'average'
+include Average
+
 class HomeController < ApplicationController
   def index
     @body_color_class = 'm-bg-default'
