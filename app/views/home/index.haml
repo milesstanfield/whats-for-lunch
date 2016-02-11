@@ -5,5 +5,5 @@
       .col-lg-12
         %h3= 'Restaurants'
       .col-lg-12
-        - @recommendations.each_with_index do |(value, restaurants), index|
-          = render 'shared/card', restaurants: restaurants, average_rating: Average.find(value, restaurants.count), recommendation_index: index
+        - @recommendations.each_with_index do |(rating, restaurants), index|
+          = render 'shared/card', restaurants: restaurants, average_rating: rating, recommendation_index: index

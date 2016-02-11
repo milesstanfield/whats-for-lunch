@@ -6,7 +6,7 @@ describe HomeController, type: :controller do
       restaurants = double(:restaurants)
       recommendations = double(:recommendations)
       expect(Restaurant).to receive(:limit).with(100).and_return(restaurants)
-      expect(restaurants).to receive(:recommended).and_return(recommendations)
+      expect(Recommendations).to receive(:fetch).with(restaurants).and_return(recommendations)
       get :index
       expect(response).to render_template :index
       expect(assigns(:recommendations)).to eq recommendations
