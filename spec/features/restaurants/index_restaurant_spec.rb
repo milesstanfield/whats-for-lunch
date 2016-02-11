@@ -13,19 +13,18 @@ describe 'index restaurant page', type: :feature do
   context 'when logged in' do
     before do
       user = FactoryGirl.create(:user)
-      create_restaurants_ratings_visits(user)
-      FactoryGirl.create(:restaurant, name: 'unowned')
+      create_restaurants_ratings(user)
       login user
       visit '/restaurants'
     end
 
     describe '/restaurants' do
       it 'has a header' do
-        expect(page).to have_text 'Your Restaurants'
+        expect(page).to have_text 'Springbot Restaurants'
       end
 
       describe 'data table' do
-        it 'has users restaurants in recent order' do
+        it 'has users restaurants in order by name' do
           within rows.first do
             expect(page).to have_text 'newest'
           end
@@ -35,13 +34,7 @@ describe 'index restaurant page', type: :feature do
           end
         end
 
-        it 'doesnt have restaurants which arent owned by current user' do
-          expect(page).not_to have_text 'unowned'
-        end
-
         describe 'data rows' do
-          let(:restaurant){ Restaurant.find_by_name('newest') }
-
           it 'has restaurant name' do
             within rows.first do
               expect(page).to have_text 'newest'
@@ -61,6 +54,8 @@ describe 'index restaurant page', type: :feature do
           end
 
           describe 'action links' do
+            let(:restaurant){ Restaurant.find_by_name('newest') }
+
             describe 'view link' do
               it 'exists' do
                 within rows.first do
@@ -112,9 +107,10 @@ describe 'index restaurant page', type: :feature do
 
                 it 'removes record' do
                   within rows.first do
+                    expect(page).to have_text 'newest'
                     click_link 'delete'
                   end
-                  expect(Restaurant.find_by_name('newest')).not_to be_present
+                  expect(page).not_to have_text 'newest'
                 end
               end
             end

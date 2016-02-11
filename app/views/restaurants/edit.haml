@@ -10,12 +10,11 @@
           = f.text_field :name, class: 'form-control', placeholder: @restaurant.name
           %span.input-group-btn
         .form-group
-          = label_tag :rating, 'Rating'
+          = label_tag :rating, 'Your Rating'
           = select(:rating, :value, Rating.available_values, selected: @restaurant.user_rating(current_user).value)
           = hidden_field :rating, :user_id, value: current_user.id
         .form-group
-          = label_tag :visit, 'Your last visit'
-          = text_field :visit, :time, 'data-provide' => 'datepicker', value: @restaurant.user_visit(current_user).time
-          = hidden_field :visit, :user_id, value: current_user.id
+          = label_tag :visit, 'Last visit'
+          = f.text_field :last_visited, 'data-provide' => 'datepicker', value: @restaurant.last_visited
         .form-group
           = f.submit 'Update Restaurant', class: 'btn btn-primary'

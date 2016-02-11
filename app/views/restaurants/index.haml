@@ -3,20 +3,21 @@
   .row.l-margin-top-nav-height
     .col-lg-12
       = render 'shared/flash_messages'
-      %h2.sub-header Your Restaurants
+      %h2.sub-header Springbot Restaurants
       %table.table.table-striped
         %thead
           %tr
             %th Name
-            %th Rating
+            %th Your Rating
             %th Last Visit
             %th Actions
         %tbody
-          - @restaurants.recent.each do |restaurant|
+          - @restaurants.order_by_name.each do |restaurant|
             %tr{name: 'data-row'}
               %td= restaurant.name
+              - binding.pry if restaurant.user_rating(current_user).nil?
               %td= restaurant.user_rating(current_user).value_in_words
-              %td= restaurant.user_visit(current_user).time
+              %td= restaurant.last_visited
               %td
                 = link_to 'view', restaurant_path(restaurant)
                 %span= '/'

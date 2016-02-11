@@ -11,12 +11,11 @@
           = f.text_field :name, class: 'form-control', placeholder: 'name of restaurant'
           %span.input-group-btn
         .form-group
-          = label_tag :rating, 'Rating'
+          = label_tag :rating, 'Your Rating'
           = select(:rating, :value, Rating.available_values, selected: '1')
           = hidden_field :rating, :user_id, value: current_user.id
         .form-group
-          = label_tag :visit, 'Your last visit'
-          = text_field :visit, :time, 'data-provide' => 'datepicker', value: TimeFormatter.visit_time(Time.now)
-          = hidden_field :visit, :user_id, value: current_user.id
+          = label_tag :visit, 'Last Visit'
+          = f.text_field :last_visited, 'data-provide' => 'datepicker', value: TimeFormatter.visit_time(Time.now)
         .form-group
           = f.submit 'Create Restaurant', class: 'btn btn-primary'

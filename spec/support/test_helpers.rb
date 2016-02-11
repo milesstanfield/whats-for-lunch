@@ -18,7 +18,7 @@ module TestHelpers
   def fill_and_submit_new_restaurant_form(name = 'Chick-fil-a')
     fill_in 'restaurant_name', with: name
     select '5', from: 'rating_value'
-    fill_in 'visit_time', with: '01/04/2016'
+    fill_in 'restaurant_last_visited', with: '01/04/2016'
     click_button 'Create Restaurant'
   end
 
@@ -26,28 +26,19 @@ module TestHelpers
     Time.parse('2016-02-09 23:41:47 -0500')
   end
 
-  def create_restaurants_ratings_visits(user = FactoryGirl.create(:user))
-    oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', created_at: now_time - 2.days)
-    older_restaurant = FactoryGirl.create(:restaurant, name: 'older', created_at: now_time - 1.days)
-    newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', created_at: now_time)
-
-    user.restaurants << oldest_restaurant
+  def create_restaurants_ratings(user = FactoryGirl.create(:user))
+    oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', last_visited: TimeFormatter.visit_time(now_time - 2.days))
+    older_restaurant = FactoryGirl.create(:restaurant, name: 'older', last_visited: TimeFormatter.visit_time(now_time - 1.days))
+    newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', last_visited: TimeFormatter.visit_time(now_time))
     oldest_restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
-    oldest_restaurant.visits << FactoryGirl.create(:visit, user_id: user.id, time: TimeFormatter.visit_time(now_time))
-    user.restaurants << older_restaurant
     older_restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
-    older_restaurant.visits << FactoryGirl.create(:visit, user_id: user.id, time: TimeFormatter.visit_time(now_time))
-    user.restaurants << newest_restaurant
     newest_restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
-    newest_restaurant.visits << FactoryGirl.create(:visit, user_id: user.id, time: TimeFormatter.visit_time(now_time))
   end
 
   def create_path_from_destination!(destination, user)
     Restaurant.delete_all
     restaurant = FactoryGirl.create(:restaurant)
-    user.restaurants << restaurant
     restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
-    restaurant.visits << FactoryGirl.create(:visit, user_id: user.id, time: TimeFormatter.visit_time(now_time))
 
     case destination
     when '/restaurants/:id'

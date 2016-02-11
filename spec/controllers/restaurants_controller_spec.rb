@@ -61,7 +61,7 @@ describe RestaurantsController, type: :controller do
     describe '#index' do
       it 'renders the index template' do
         restaurants = double(:restaurants)
-        expect(Restaurant).to receive(:where).with({:user_id=> User.first.id}).and_return(restaurants)
+        expect(Restaurant).to receive(:limit).with(100).and_return(restaurants)
         get :index
         expect(response).to render_template :index
         expect(assigns(:restaurants)).to eq restaurants
@@ -93,12 +93,11 @@ describe RestaurantsController, type: :controller do
     describe '#update' do
       context 'on successful updating restaurant' do
         it 'redirects to index template' do
-          params = {id: '123', restaurant: {name: 'Chick-fil-a', user_id: '456'}, rating: {value: '4'}, visit: {time: '01/04/2006'}}
+          params = {id: '123', restaurant: {name: 'Chick-fil-a', last_visited: '01/04/2006'}, rating: {value: '4'}}
           restaurant = Restaurant.new({id: '123'})
           expect(Restaurant).to receive(:find).with('123').and_return(restaurant)
-          expect(restaurant).to receive(:update_attributes).with({'name'=>'Chick-fil-a', 'user_id'=>'456'}).and_return(true)
+          expect(restaurant).to receive(:update_attributes).with({'name'=>'Chick-fil-a', 'last_visited'=>'01/04/2006'}).and_return(true)
           expect(controller).to receive(:update_rating!).with(restaurant).and_return(true)
-          expect(controller).to receive(:update_visit!).with(restaurant).and_return(true)
           put :update, params
           expect(response).to redirect_to '/restaurants'
           expect(session[:flash]['flashes']).to eq({'message'=>'Restaurant successfully updated!'})
@@ -108,10 +107,10 @@ describe RestaurantsController, type: :controller do
 
       context 'on unsuccessful updating restaurant' do
         it 'redirects to index template' do
-          params = {id: '123', restaurant: {name: nil}, rating: {value: nil}}
+          params = {id: '123', restaurant: {name: nil, last_visited: '01/04/2006'}, rating: {value: nil}}
           restaurant = Restaurant.new({id: '123'})
           expect(Restaurant).to receive(:find).with('123').and_return(restaurant)
-          expect(restaurant).to receive(:update_attributes).with({name: nil}).and_return(false)
+          expect(restaurant).to receive(:update_attributes).with({name: nil, last_visited: '01/04/2006'}).and_return(false)
           put :update, params
           expect(response).to redirect_to '/restaurants/new'
           expect(assigns(:restaurant)).to eq restaurant
@@ -122,10 +121,11 @@ describe RestaurantsController, type: :controller do
     describe '#create' do
       context 'on successfully creating restaurant' do
         it 'redirects to index' do
-          params = {restaurant: {name: 'Chick-fil-a'}, rating: {value: '1'}, visit: {time: '01/04/2016'}}
+          params = {restaurant: {name: 'Chick-fil-a', last_visited: '01/04/2016'}, rating: {value: '1'}}
           restaurant = Restaurant.new(params[:restaurant])
           expect(Restaurant).to receive(:new).with(params[:restaurant]).and_return(restaurant)
           expect(restaurant).to receive(:save).and_return(true)
+          expect(controller).to receive(:save_rating!).with(restaurant).and_return(true)
           post :create, params
           expect(response).to redirect_to '/restaurants'
           expect(session[:flash]['flashes']).to eq({'message'=>'Restaurant successfully created!'})
@@ -136,7 +136,7 @@ describe RestaurantsController, type: :controller do
       context 'on unsuccessfully creating restaurant' do
         it 'rerenders the new template' do
           @request.env['HTTP_REFERER'] = '/restaurants/new'
-          params = {restaurant: {name: nil}}
+          params = {restaurant: {name: nil, last_visited: '01/04/2016'}, rating: {value: '1'}}
           restaurant = Restaurant.new(params[:restaurant])
           expect(Restaurant).to receive(:new).with(params[:restaurant]).and_return(restaurant)
           expect(restaurant).to receive(:save).and_return(false)

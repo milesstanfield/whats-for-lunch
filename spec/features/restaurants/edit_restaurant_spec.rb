@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'edit restaurant page', type: :feature do
   let(:user){ FactoryGirl.create(:user) }
-  before { create_restaurants_ratings_visits(user) }
+  before { create_restaurants_ratings(user) }
   let(:restaurant){ Restaurant.find_by_name('newest') }
 
   context 'when not logged in' do
@@ -33,7 +33,7 @@ describe 'edit restaurant page', type: :feature do
 
       it 'has a visit time field' do
         within 'form' do
-          fill_in 'visit_time', with: '01/04/2016'
+          fill_in 'restaurant_last_visited', with: '01/04/2016'
         end
       end
 
@@ -46,7 +46,7 @@ describe 'edit restaurant page', type: :feature do
           before do
             fill_in 'restaurant_name', with: 'foo name'
             select '5', from: 'rating_value'
-            fill_in 'visit_time', with: '03/04/2016'
+            fill_in 'restaurant_last_visited', with: '03/04/2016'
             click_button 'Update Restaurant'
           end
 

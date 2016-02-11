@@ -11,13 +11,5 @@ describe User do
     it 'has many ratings' do
       expect(user.ratings).to eq []
     end
-
-    it 'has many restaurants' do
-      expect(user.restaurants).to eq []
-    end
-
-    it 'has many visits' do
-      expect(user.visits).to eq []
-    end
   end
 end

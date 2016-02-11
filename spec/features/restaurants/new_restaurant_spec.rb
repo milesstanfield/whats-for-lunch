@@ -30,7 +30,7 @@ describe 'new restaurant page', type: :feature do
       end
 
       it 'has a visit time field' do
-        fill_in 'visit_time', with: '01/04/2016'
+        fill_in 'restaurant_last_visited', with: '01/04/2016'
       end
 
       it 'has a submit button' do
