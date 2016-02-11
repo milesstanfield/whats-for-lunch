@@ -8,13 +8,15 @@
         %thead
           %tr
             %th Name
-            %th Your Rating
-            %th Action
+            %th Rating
+            %th Last Visit
+            %th Actions
         %tbody
           - @restaurants.recent.each do |restaurant|
             %tr{name: 'data-row'}
               %td= restaurant.name
               %td= restaurant.user_rating(current_user).value_in_words
+              %td= restaurant.user_visit(current_user).time
               %td
                 = link_to 'view', restaurant_path(restaurant)
                 %span= '/'

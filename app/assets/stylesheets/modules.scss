@@ -1,3 +1,11 @@
+@import 'variables';
+
 .m-bg-primary {
-  background: #337ab7;
+  background: $primary;
+}
+.m-bg-default {
+  background: $default;
+}
+.m-bg-white {
+  background: white;
 }

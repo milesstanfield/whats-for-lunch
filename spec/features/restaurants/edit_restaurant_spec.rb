@@ -31,6 +31,12 @@ describe 'edit restaurant page', type: :feature do
         end
       end
 
+      it 'has a visit time field' do
+        within 'form' do
+          fill_in 'visit_time', with: '01/04/2016'
+        end
+      end
+
       describe 'update button' do
         it 'exists' do
           expect(page).to have_button 'Update Restaurant'
@@ -40,6 +46,7 @@ describe 'edit restaurant page', type: :feature do
           before do
             fill_in 'restaurant_name', with: 'foo name'
             select '5', from: 'rating_value'
+            fill_in 'visit_time', with: '03/04/2016'
             click_button 'Update Restaurant'
           end
 
@@ -55,6 +62,12 @@ describe 'edit restaurant page', type: :feature do
             it 'shows updated rating' do
               within '[name=\'data-row\']' do
                 expect(page).to have_text '5 of 5'
+              end
+            end
+
+            it 'shows updated visit time' do
+              within '[name=\'data-row\']' do
+                expect(page).to have_text '03/04/2016'
               end
             end
           end

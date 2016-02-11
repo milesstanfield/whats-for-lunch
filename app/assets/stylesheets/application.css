@@ -15,7 +15,7 @@
  *= require layouts
  *= require modules
  *= require base
- *= require commons
  *= require bootstrap-datepicker
+ *= require dictate_css/base
  *= require_self
  */

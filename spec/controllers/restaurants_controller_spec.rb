@@ -93,11 +93,12 @@ describe RestaurantsController, type: :controller do
     describe '#update' do
       context 'on successful updating restaurant' do
         it 'redirects to index template' do
-          params = {id: '123', restaurant: {name: 'Chick-fil-a', user_id: '456'}, rating: {value: '4'}}
+          params = {id: '123', restaurant: {name: 'Chick-fil-a', user_id: '456'}, rating: {value: '4'}, visit: {time: '01/04/2006'}}
           restaurant = Restaurant.new({id: '123'})
           expect(Restaurant).to receive(:find).with('123').and_return(restaurant)
           expect(restaurant).to receive(:update_attributes).with({'name'=>'Chick-fil-a', 'user_id'=>'456'}).and_return(true)
           expect(controller).to receive(:update_rating!).with(restaurant).and_return(true)
+          expect(controller).to receive(:update_visit!).with(restaurant).and_return(true)
           put :update, params
           expect(response).to redirect_to '/restaurants'
           expect(session[:flash]['flashes']).to eq({'message'=>'Restaurant successfully updated!'})

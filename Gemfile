@@ -12,6 +12,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'dictate_css'
 
 group :development do
   gem 'web-console', '~> 2.0'

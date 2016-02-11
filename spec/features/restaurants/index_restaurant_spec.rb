@@ -54,6 +54,12 @@ describe 'index restaurant page', type: :feature do
             end
           end
 
+          it 'has users restaurant visit' do
+            within rows.first do
+              expect(page).to have_text '02/09/2016'
+            end
+          end
+
           describe 'action links' do
             describe 'view link' do
               it 'exists' do

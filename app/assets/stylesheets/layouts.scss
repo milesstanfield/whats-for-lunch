@@ -3,3 +3,16 @@
 .l-margin-top-nav-height {
   margin-top: $nav-height;
 }
+.l-height-minus-navs {
+  height: calc(100% - #{$nav-height});
+}
+.l-medium-vertical-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.l-card {
+  width: 250px;
+  height: 250px;
+  padding: 10px;
+  margin-bottom: 20px;
+}

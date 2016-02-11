@@ -47,6 +47,7 @@ module TestHelpers
     restaurant = FactoryGirl.create(:restaurant)
     user.restaurants << restaurant
     restaurant.ratings << FactoryGirl.create(:rating, user_id: user.id)
+    restaurant.visits << FactoryGirl.create(:visit, user_id: user.id, time: TimeFormatter.visit_time(now_time))
 
     case destination
     when '/restaurants/:id'

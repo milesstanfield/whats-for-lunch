@@ -74,6 +74,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dictate_css (0.1.0)
+      rails
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -248,6 +250,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   devise
+  dictate_css
   factory_girl_rails
   ffaker
   haml-rails
