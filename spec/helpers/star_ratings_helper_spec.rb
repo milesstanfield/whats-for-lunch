@@ -54,10 +54,6 @@ describe StarRatingsHelper, type: :helper do
         it 'has id' do
           expect(hash[:data][:id]).to eq restaurant.id
         end
-
-        it 'has action' do
-          expect(hash[:data][:action]).to eq 'update'
-        end
       end
     end
   end

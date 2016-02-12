@@ -25,8 +25,7 @@ module StarRatingsHelper
       last_visited: restaurant.last_visited,
       value: ((index + 1) - 6).abs,
       user_id: user_id(current_user, signed_in),
-      id: restaurant.id,
-      action: (rating ? 'update' : 'create')
+      id: restaurant.id
     }
     {type: 'star', class: star_class(state, rating, index), data: data}
   end

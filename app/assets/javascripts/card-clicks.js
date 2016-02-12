@@ -2,9 +2,9 @@ $(document).ready(function(){
   var starSelector = '[type=\'star\']'
   var star = $(starSelector)
 
-  function ajaxPost(data, action){
+  function ajaxPost(data){
     $.ajax({
-      url: ('/restaurants/' + action),
+      url: ('/restaurants/update'),
       type: 'POST',
       data: data,
       dataType: 'script'
@@ -37,10 +37,9 @@ $(document).ready(function(){
     var lastVisited = $(this).data('lastVisited')
     var value = $(this).data('value')
     var userId = $(this).data('userId')
-    var action = $(this).data('action')
     var data = {restaurant: {name: name, last_visited: lastVisited}, rating: {value: value, user_id: userId}, id: id}
     var familyStars = $(this).closest('[name=\'card\']').find(starSelector)
     starBehavior(familyStars, value)
-    ajaxPost(data, action)
+    ajaxPost(data)
   });
 });
