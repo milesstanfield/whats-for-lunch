@@ -5,8 +5,7 @@ class TimeFormatter
       time.strftime(strf)
     end
 
-    def days_ago(visited_time, control_time = nil)
-      control_time = control_time || Time.now
+    def days_ago(visited_time, control_time = Time.now)
       (control_time - parsed_visit_time(visited_time)).to_i / 1.day
     end
 

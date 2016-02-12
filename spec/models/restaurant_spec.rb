@@ -41,11 +41,18 @@ describe Restaurant do
         expect(Restaurant.order_by_name.map(&:name)).to eq ['ancient', 'newest', 'older', 'oldest']
       end
     end
+  end
 
-    describe '.by_day(day)' do
-      it 'returns all orders that fall within a given day range' do
-        expect(Restaurant.by_day(3).find_by_name('newest')).to be nil
-      end
+  describe '.days_old(day)' do
+    before do
+      older = FactoryGirl.create(:restaurant, name: 'older', last_visited: '02/03/2016')
+      newer = FactoryGirl.create(:restaurant, name: 'newer', last_visited: '02/09/2016')
+    end
+
+    it 'returns all orders that fall within a given day range' do
+      time = TimeFormatter.parsed_visit_time('02/11/2016')
+      expect(Restaurant.days_old(3, time).find_by_name('older')).to be_present
+      expect(Restaurant.days_old(3, time).find_by_name('newer')).not_to be_present
     end
   end
 end

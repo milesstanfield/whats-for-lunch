@@ -50,11 +50,11 @@ module TestHelpers
     end
   end
 
-  def create_multi_user_restaurants
-    oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', last_visited: TimeFormatter.visit_time(now_time - 2.days))
-    older_restaurant = FactoryGirl.create(:restaurant, name: 'older', last_visited: TimeFormatter.visit_time(now_time - 1.days))
-    newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', last_visited: TimeFormatter.visit_time(now_time))
-    ancient_restaurant = FactoryGirl.create(:restaurant, name: 'ancient', last_visited: TimeFormatter.visit_time(now_time - 30.days))
+  def create_multi_user_restaurants(time = now_time)
+    oldest_restaurant = FactoryGirl.create(:restaurant, name: 'oldest', last_visited: TimeFormatter.visit_time(time - 2.days))
+    older_restaurant = FactoryGirl.create(:restaurant, name: 'older', last_visited: TimeFormatter.visit_time(time - 1.days))
+    newest_restaurant = FactoryGirl.create(:restaurant, name: 'newest', last_visited: TimeFormatter.visit_time(time))
+    ancient_restaurant = FactoryGirl.create(:restaurant, name: 'ancient', last_visited: TimeFormatter.visit_time(time - 30.days))
 
     user1 = FactoryGirl.create(:user)
     user2 = FactoryGirl.create(:user, email: 'foo@example.com')

@@ -1,6 +1,16 @@
 .rating
-  - StarRatings.options(average_rating).each do |option|
-    - if option
-      %span.star-selected.clickable
-    - else
-      %span.star.clickable
+  = link_to new_user_session_path, class: 'l-no-decoration' do
+    - StarRatings.options(average_rating).each_with_index do |option, index|
+      - star_class = option ? 'star-selected' : 'star'
+      - user_rating ||= nil
+      - user_id ||= nil
+
+      - if user_signed_in?
+        - user_id = current_user.id
+        - user_rating = restaurant.user_rating(current_user)
+        - if user_rating && (user_rating.value >= ((index + 1) - 6).abs )
+          - star_class = 'star-voted'
+
+      - data = {name: restaurant.name, last_visited: restaurant.last_visited, value: ((index + 1) - 6).abs, user_id: user_id, id: restaurant.id, action: (user_rating ? 'update' : 'create')}
+
+      %span.clickable{type: 'star', class: star_class, data: data}

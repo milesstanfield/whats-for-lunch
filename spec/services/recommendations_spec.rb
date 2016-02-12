@@ -1,18 +1,18 @@
 require 'spec_helper'
 
 describe Recommendations do
-  before { create_multi_user_restaurants }
+  before { create_multi_user_restaurants(Time.now) }
   subject(:recommendations){ Recommendations.fetch(Restaurant.all) }
 
   describe '.fetch(restaurants)' do
     it 'orders restaurants by their cumulative ratings' do
       recommendations.each_with_index do |recommendation, index|
-        expect(recommendation[0]).to eq 3 if index == 0
+        expect(recommendation[0]).to eq 2 if index == 0
         expect(recommendation[0]).to eq 2 if index == 1
       end
     end
 
-    it 'filters restaurants by their last_visited date (3 days new are removed)' do
+    it 'doesnt include records with visit_dates < 3 days old' do
       newest = Restaurant.find_by_name('newest')
       newest_is_in_collection = recommendations.any? do |recommendation|
         recommendation[1].any? {|restaurant| restaurant == newest }

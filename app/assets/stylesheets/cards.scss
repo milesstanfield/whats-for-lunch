@@ -14,12 +14,15 @@
 .star:before {
   content: '\f006';
 }
-.star-selected:before {
+.star-selected:before, .star-voted:before {
   content: '\f005';
 }
 .rating span[class*='star']:hover:before, .rating span[class*='star']:hover ~ span[class*='star']:before {
   content: '\f005';
-  color: #e3cf7a;
+  color: $warning;
+}
+.star-voted:before {
+  color: $warning;
 }
 .card-name {
   font-size: 30px;

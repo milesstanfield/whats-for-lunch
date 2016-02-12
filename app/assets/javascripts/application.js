@@ -15,3 +15,4 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
+//= require admin_cards

@@ -1,6 +1,9 @@
 @import 'variables';
 @import 'mixins';
 
+.l-no-decoration, .l-no-decoration:hover, .l-no-decoration:visited, .l-no-decoration:focus {
+  text-decoration: none;
+}
 .l-z-index-5 {
   z-index: 5;
 }

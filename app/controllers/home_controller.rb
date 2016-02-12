@@ -8,6 +8,6 @@ class HomeController < ApplicationController
 
   def restaurants
     query = Restaurant.limit(100)
-    params[:day].present? ? query.by_day(params[:day]) : query
+    params[:day].present? ? query.days_old(params[:day]) : query
   end
 end

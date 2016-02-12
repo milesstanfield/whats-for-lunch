@@ -6,7 +6,7 @@
           .m-bg-white.height-100.width-100.m-border.relative
             .absolute-vertical-center.text-center.width-100.border-box.l-inner-card-padding.l-z-index-5.l-medium-vertical-padding
               .card-name= restaurant.name
-              = render 'shared/ratings', average_rating: average_rating
+              = render 'shared/ratings', average_rating: average_rating, restaurant: restaurant
 
             .border-box.l-inner-card-padding.height-100.l-medium-vertical-padding
               .relative.height-100
@@ -17,7 +17,8 @@
                     .medium-prompt.m-color-primary days ago
 
                 .absolute.bottom.right
-                  .fa.fa-calendar.card-icon.clickable
+                  = link_to edit_restaurant_path(restaurant) do
+                    .fa.fa-calendar.card-icon.clickable
 
                 - if index == 0 && recommendation_index == 0
                   .absolute.right.top.card-bookmark.m-color-warning
