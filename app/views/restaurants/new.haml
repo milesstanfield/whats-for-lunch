@@ -17,5 +17,7 @@
         .form-group
           = label_tag :visit, 'Last Visit'
           = f.text_field :last_visited, 'data-provide' => 'datepicker', value: TimeFormatter.visit_time(Time.now)
+        .alert.alert-info
+          BE AWARE: Restaurants visited within the last 2 days will NOT show up on the homepage recommendations
         .form-group
           = f.submit 'Create Restaurant', class: 'btn btn-primary'

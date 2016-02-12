@@ -37,6 +37,12 @@ describe 'edit restaurant page', type: :feature do
         end
       end
 
+      it 'has a be aware alert' do
+        within 'form' do
+          expect(page).to have_text 'BE AWARE:'
+        end
+      end
+
       describe 'update button' do
         it 'exists' do
           expect(page).to have_button 'Update Restaurant'

@@ -33,6 +33,10 @@ describe 'new restaurant page', type: :feature do
         fill_in 'restaurant_last_visited', with: '01/04/2016'
       end
 
+      it 'has a be aware alert' do
+        expect(page).to have_text 'BE AWARE:'
+      end
+
       it 'has a submit button' do
         expect(page).to have_button 'Create Restaurant'
       end
