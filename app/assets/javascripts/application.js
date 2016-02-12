@@ -15,4 +15,3 @@
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/core
-//= require card_clicks

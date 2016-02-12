@@ -7,19 +7,19 @@ describe 'home', type: :feature do
 
     describe 'cards' do
       it 'has restaurant name' do
-        within first_card do
+        within cards.first do
           expect(page).to have_text 'ancient'
         end
       end
 
       it 'has days since last visit' do
-        within first_card do
+        within cards.first do
           expect(page).to have_text '3'
         end
       end
 
       it 'has (x) amount of community rated stars' do
-        within first_card do
+        within cards.first do
           selected_stars = page.all('.star-selected')
           expect(selected_stars.count).to eq 2
         end
@@ -27,9 +27,25 @@ describe 'home', type: :feature do
 
       context 'first card' do
         it 'has #1 pick mark' do
-          within first_card do
+          within cards.first do
             expect(page).to have_css '.card-bookmark'
             expect(page).to have_text '#1 pick'
+          end
+        end
+      end
+
+      context 'last card' do
+        it 'has an add new icon' do
+          within cards.last do
+            expect(page).to have_css '.fa-plus'
+          end
+        end
+
+        context 'on click' do
+          it 'redirects to ' do
+            within cards.last do
+              page.first('a').click
+            end
           end
         end
       end
@@ -71,8 +87,8 @@ describe 'home', type: :feature do
     end
   end
 
-  def first_card
-    page.first('[name=\'card\']')
+  def cards
+    page.all('[name=\'card\']')
   end
 
   def sub_nav

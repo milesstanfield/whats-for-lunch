@@ -51,6 +51,14 @@
 .card-icon {
   font-size: 24px;
 }
+.plus-card {
+  font-size: 40px;
+  &:hover {
+    .m-bg-primary {
+      background: #3071a9;
+    }
+  }
+}
 .calendar-icon:hover {
   color: $info;
 }

@@ -1,9 +1,21 @@
+- if user_signed_in?
+  - content_for :head do
+    = javascript_include_tag 'card-clicks'
+
 = render 'shared/sub_nav'
 .m-bg-default.height-100.width-100
   .container
     .row
       .col-lg-12
-        %h3= 'Restaurants'
+        %h3 Restaurants
       .col-lg-12
         - @recommendations.each_with_index do |(rating, restaurants), index|
           = render 'shared/card', restaurants: restaurants, average_rating: rating, recommendation_index: index
+
+        .relative.card.l-card.border-box.inline-block.v-align-top{name: 'card'}
+          = link_to new_restaurant_path, class: 'plus-card' do
+            .l-square-parent
+              .l-sized-child
+                .l-card-padding.height-100.width-100
+                  .m-bg-primary.height-100.width-100.relative
+                    .fa.fa-plus.absolute-center.m-color-white
